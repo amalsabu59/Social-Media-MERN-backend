@@ -17,7 +17,7 @@ mongoose.connect(process.env.connection_url, {
     
 
     
-  }).then(()=> console.log("connected  to mongodb"))
+  }).then(()=> console.log("connected  to mongodb !!"))
 
     .catch(err => console.log(err.message));
 
