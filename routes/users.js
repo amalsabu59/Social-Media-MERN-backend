@@ -101,7 +101,7 @@ router.get("/friends/:userId", async (req,res)=>{
                 return User.findById(friendId)
             })
         )
-        let friendList =[];
+        let friendList = [];
         friends.map(friend=>{
             const {_id,username,profilePicture} = friend
            friendList.push({_id,username,profilePicture}) 
