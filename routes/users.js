@@ -49,6 +49,18 @@ router.delete("/:id", async (req,res) => {
 })
 
 
+//get all users 
+router.get("/allusers",  async (req,res)=>{
+    try {
+    const alluser = await User.find()
+   
+    res.status(200).json(alluser);
+    } catch(err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+})
+
 //get a user
 router.get("/", async (req, res) => {
     const userId = req.query.userId;

@@ -40,6 +40,7 @@ try {
 
     const validPassword = await bcrypt.compare(req.body.password,user.password)
     !validPassword && res.status(400).json("wrong password")
+    
     res.status(200).json(user)
 } catch (err) {
     response.status(500).json(err)
