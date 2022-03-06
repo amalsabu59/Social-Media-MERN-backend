@@ -25,7 +25,7 @@ mongoose.connect(process.env.connection_url, {
     .catch(err => console.log(err.message));
 
 
-app.use("/images",express.static(path.join(__dirname,"public/images")));
+//app.use("/images",express.static(path.join(__dirname,"public/images")));
 
 app.use("/images/person",express.static(path.join(__dirname,"public/images/person")))
 //Middleware
