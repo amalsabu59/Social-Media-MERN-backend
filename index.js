@@ -25,7 +25,9 @@ mongoose.connect(process.env.connection_url, {
     .catch(err => console.log(err.message));
 
 
-app.use("/images",express.static(path.join(__dirname,"public/images")))
+//app.use("/images",express.static(path.join(__dirname,"public/images")));
+
+app.use("/images/person",express.static(path.join(__dirname,"public/images/person")))
 //Middleware
 
 app.use(express.json());
@@ -33,9 +35,27 @@ app.use(helmet());
 app.use(morgan("common"));
 
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/images");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, req.body.name);
+//   },
+// });
+
+// const upload = multer({ storage: storage });
+// app.post("/api/upload", upload.single("file"), (req, res) => {
+//   try {
+//     return res.status(200).json("File uploded successfully");
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images");
+    cb(null, "public/images/person");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
@@ -43,7 +63,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/api/uploaddp", upload.single("file"), (req, res) => {
   try {
     return res.status(200).json("File uploded successfully");
   } catch (error) {
