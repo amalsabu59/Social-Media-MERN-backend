@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const userRoutes = require("./routes/users")
 const authRoutes = require("./routes/auth")
 const postRoutes = require("./routes/posts")
+const conversationRoutes = require("./routes/conversations")
+const messageRoutes = require("./routes/messages")
 const multer = require("multer")
 const path = require("path")
 
@@ -25,7 +27,6 @@ mongoose.connect(process.env.connection_url, {
     .catch(err => console.log(err.message));
 
 
-//app.use("/images",express.static(path.join(__dirname,"public/images")));
 
 app.use("/images/person",express.static(path.join(__dirname,"public/images/person")))
 //Middleware
@@ -35,23 +36,7 @@ app.use(helmet());
 app.use(morgan("common"));
 
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "public/images");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, req.body.name);
-//   },
-// });
 
-// const upload = multer({ storage: storage });
-// app.post("/api/upload", upload.single("file"), (req, res) => {
-//   try {
-//     return res.status(200).json("File uploded successfully");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -74,7 +59,9 @@ app.post("/api/uploaddp", upload.single("file"), (req, res) => {
 app.use("/api/users",userRoutes);
 app.use("/api/auth",authRoutes);
 app.use("/api/posts",postRoutes);
-
+app.use("/api/posts",postRoutes);
+app.use("/api/conversations",conversationRoutes);
+app.use("/api/messages",messageRoutes);
 
 app.listen(8800,()=>{
     console.log("backend server is running !!");
